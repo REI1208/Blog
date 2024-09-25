@@ -2,7 +2,7 @@
     <div class="container">
         <n-button @click="back">Back</n-button>
         <n-divider />
-        <n-h1>{{ blogInfo.title }}</n-h1>
+        <n-h1 prefix="bar" align-text type="info">{{ blogInfo.title }}</n-h1>
         <n-divider />
         <div class="blog-content">
             <n-p>
@@ -13,7 +13,7 @@
 </template>
 
 <script setup>
-import { NPopselect, NDivider, NCard, NSpace, NPagination, NInput, NButton, NH1, NP } from 'naive-ui'
+import { NDivider, NButton, NH1, NP, } from 'naive-ui'
 import { ref, inject, reactive, onMounted, nextTick, toValue, computed } from 'vue';
 import { useRouter, useRoute, RouterView } from 'vue-router';
 
