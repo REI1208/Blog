@@ -9,8 +9,8 @@
 
 <script setup>
 import '@wangeditor/editor/dist/css/style.css';
-import { watch, ref, shallowRef, onMounted, inject, nextTick } from 'vue';
-import { Editor, Toolbar } from '@wangeditor/editor-for-vue';
+import { watch, ref, shallowRef, inject, } from 'vue';
+const { Toolbar, Editor } = window.wangeditor;
 
 const server_url = inject("server_url")
 

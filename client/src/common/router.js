@@ -18,9 +18,7 @@ let routes = [
         component: () => import("../views/dashboard/Dashboard.vue"),
         children: [
             { path: "/dashboard/category", component: () => import("../views/dashboard/Category.vue") },
-            { path: "/dashboard/article", component: () => import("../views/dashboard/Article.vue") },
-            { path: "/dashboard/test", component: () => import("../components/test_2.vue") }
-
+            { path: "/dashboard/article", component: () => import("../views/dashboard/Article.vue") }
         ]
     },
 ]

@@ -54,13 +54,8 @@
 </template>
 
 <script setup>
-import { AdminStore } from '../../stores/AdminStore'
-const adminStore = AdminStore()
 import { NInput, NButton, NTable, NSpace, NModal, } from 'naive-ui'
 import { ref, inject, reactive, onMounted, nextTick } from 'vue';
-import { useRouter, useRoute, RouterView } from 'vue-router';
-const router = useRouter()
-const route = useRoute
 
 const axios = inject("axios")
 const message = inject("message")

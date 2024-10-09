@@ -14,14 +14,13 @@
 
 <script setup>
 import { NDivider, NButton, NH1, NP, } from 'naive-ui'
-import { ref, inject, reactive, onMounted, nextTick, toValue, computed } from 'vue';
-import { useRouter, useRoute, RouterView } from 'vue-router';
+import { ref, inject, onMounted } from 'vue';
+import { useRouter, useRoute } from 'vue-router';
 
 const router = useRouter()
 const route = useRoute()
 
 const axios = inject("axios")
-const message = inject("message")
 
 const blogInfo = ref([])
 

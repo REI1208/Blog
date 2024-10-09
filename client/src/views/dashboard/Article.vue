@@ -71,22 +71,15 @@
 
 <script setup>
 import { AdminStore } from '../../stores/AdminStore'
-const adminStore = AdminStore()
 import { NTabs, NTabPane, NForm, NFormItem, NInput, NButton, NSelect, NCard, NSpace } from 'naive-ui'
-import { ref, inject, reactive, onMounted, nextTick, toValue } from 'vue';
-import { useRouter, useRoute, RouterView } from 'vue-router';
+import { ref, inject, reactive, onMounted, } from 'vue';
 
 import RichTextEditor from '../../components/RichTextEditor.vue';
 
-const router = useRouter()
-const route = useRoute
-
 const axios = inject("axios")
 const message = inject("message")
-const dialog = inject("dialog")
 
 const categoryOptions = ref([])
-const categoryList = ref([])
 
 const clearCommand = ref(false)  // 指令 props 状态
 

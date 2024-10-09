@@ -1,14 +1,24 @@
 <template>
     <div class="login-panel">
-        <n-card title="管理后台登录">
-            <n-form inline :label-width="80" :model="admin" :rules="rules" :size="size">
-                <n-form-item label="账号" path="account">
-                    <n-input v-model:value="admin.account" placeholder="输入账号" />
-                </n-form-item>
-                <n-form-item label="密码" path="password">
-                    <n-input v-model:value="admin.password" placeholder="输入密码" />
-                </n-form-item>
-            </n-form>
+        <n-card title="一个未知的地方" hoverable>
+            <template #header-extra>
+                <n-button attr-type="button" @click="backToHome">
+                    Back
+                </n-button>
+            </template>
+            <n-tabs class="card-tabs" default-value="signin" size="large" animated pane-wrapper-style="margin: 0 -4px"
+                pane-style="padding-left: 4px; padding-right: 4px; box-sizing: border-box;">
+                <n-tab-pane name="signin" tab="登录">
+                    <n-form inline :label-width="80" :model="admin" :rules="rules" :size="size">
+                        <n-form-item label="账号" path="account">
+                            <n-input v-model:value="admin.account" placeholder="输入账号" />
+                        </n-form-item>
+                        <n-form-item label="密码" path="password">
+                            <n-input v-model:value="admin.password" placeholder="输入密码" />
+                        </n-form-item>
+                    </n-form>
+                </n-tab-pane>
+            </n-tabs>
             <template #footer>
                 <n-checkbox v-model:checked="admin.rember">记住我</n-checkbox>
                 <n-button attr-type="button" @click="login">
@@ -20,7 +30,7 @@
 </template>
 
 <script setup>
-import { NCard, NForm, NFormItem, NInput, NCheckbox, NButton } from 'naive-ui'
+import { NCard, NForm, NFormItem, NInput, NCheckbox, NButton, NTabs, NTabPane } from 'naive-ui'
 import { ref, inject, reactive, } from 'vue';
 import { AdminStore } from '../stores/AdminStore'
 
@@ -76,6 +86,9 @@ const login = async () => {
         message.error("登陆失败")
     }
     console.log(result)
+}
+const backToHome = () => {
+    router.push('/')
 }
 </script>
 
