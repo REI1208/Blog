@@ -69,10 +69,7 @@ jobs:
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
         run: |
-          echo "$SSH_PRIVATE_KEY" > private-key.pem
-          chmod 600 private-key.pem
-          # 使用私钥连接到服务器
-          ssh -v -i private-key.pem root@47.107.108.89 << EOF
+          sshpass -p "${{ secrets.SSH_PASSWORD }}" ssh -v -o StrictHostKeyChecking=no root@47.107.108.89 << 'EOF'
           cd /app/docker/blog/
           docker-compose pull  # 拉取最新的镜像
           docker-compose up -d  # 重启容器
