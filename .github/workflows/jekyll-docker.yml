@@ -76,5 +76,6 @@ jobs:
           sshpass -p "${{ secrets.SSH_PASSWORD }}" ssh -o StrictHostKeyChecking=no -t root@47.107.108.89 << 'EOF'
           cd /app/docker/blog/
           docker-compose pull  # 拉取最新的镜像
+          docker-compose down
           docker-compose --verbose up -d  # 重启容器
           EOF
