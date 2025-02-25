@@ -12,6 +12,12 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+        
+      # Setup Docker with insecure registry
+      - name: Setup Docker for insecure registry
+        run: |
+          echo "{ \"insecure-registries\": [\"47.107.108.89:5000\"] }" | sudo tee /etc/docker/daemon.json
+          sudo systemctl restart docker
 
       # Build the client Docker image
       - name: Build client Docker image
