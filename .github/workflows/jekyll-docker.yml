@@ -69,13 +69,14 @@ jobs:
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
         run: |
-          echo "$SSH_PRIVATE_KEY" > private-key.pem  # 将密钥内容写入文件
-          chmod 600 private-key.pem                   # 确保文件只有当前用户可读
+          echo "$SSH_PRIVATE_KEY" > private-key.pem
+          chmod 600 private-key.pem
           # 跳过主机密钥验证
           mkdir -p ~/.ssh
           ssh-keyscan -H 47.107.108.89 >> ~/.ssh/known_hosts
           chmod 644 ~/.ssh/known_hosts
-          ssh -i private-key.pem 47.107.108.89       # 使用私钥文件进行 SSH 连接
+          # 使用私钥连接到服务器
+          ssh -i private-key.pem username@47.107.108.89 << EOF
           cd /app/docker/blog/
           docker-compose pull  # 拉取最新的镜像
           docker-compose up -d  # 重启容器
