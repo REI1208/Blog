@@ -30,15 +30,21 @@ jobs:
         working-directory: ./server
         run: |
           docker build -t admin/node-server:latest .
+
+      # Test List Docker images
+      - name: List Docker images
+        run: docker images
       
       # Push client Docker image to Harbor
       - name: Push client Docker image to Harbor
+        working-directory: ./client
         run: |
           docker login -u ${{ secrets.HARBOR_USERNAME }} -p ${{ secrets.HARBOR_PASSWORD }} 47.107.108.89:5000/
           docker push 47.107.108.89:5000/blog_project/client:latest
       
       # Push server Docker image to Harbor
       - name: Push server Docker image to Harbor
+        working-directory: ./server
         run: |
           docker login -u ${{ secrets.HARBOR_USERNAME }} -p ${{ secrets.HARBOR_PASSWORD }} 47.107.108.89:5000/
           docker push 47.107.108.89:5000/blog_project/node-server:latest
