@@ -21,7 +21,7 @@ jobs:
       # Delete useless Docker image
       - name: delete useless image
         run: |
-          docker image prune -a
+          yes y | docker image prune -a -f
       
       # Build the client Docker image
       - name: Build client Docker image
@@ -73,7 +73,7 @@ jobs:
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
         run: |
-          sshpass -p "${{ secrets.SSH_PASSWORD }}" ssh -o StrictHostKeyChecking=no -t root@47.107.108.89 << 'EOF'
+          sshpass -p "${{ secrets.SSH_PASSWORD }}" ssh -o StrictHostKeyChecking=no root@47.107.108.89 << 'EOF'
           cd /app/docker/blog/
           docker-compose pull  # 拉取最新的镜像
           docker-compose down
