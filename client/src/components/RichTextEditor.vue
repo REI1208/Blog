@@ -9,11 +9,10 @@
 
 <script setup>
 import '@wangeditor/editor/dist/css/style.css';
-import { watch, ref, shallowRef, inject, } from 'vue';
-const { Toolbar, Editor } = window.wangeditor;
+import { watch, ref, shallowRef, inject, onMounted, nextTick } from 'vue';
+import { Editor, Toolbar } from '@wangeditor/editor-for-vue'
 
 const server_url = inject("server_url")
-
 
 // 编辑器实例，必须用 shallowRef，重要！
 const editorRef = shallowRef();
@@ -22,8 +21,6 @@ const valueHtml = ref();
 // 模拟 ajax 异步获取内容
 
 const mode = ref("default")
-
-
 const toolbarConfig = { excludeKeys: ["uploadVideo"] }
 const editorConfig = { placeholder: '请输入内容...' };
 // 编辑器回调函数
@@ -41,6 +38,15 @@ editorConfig.MENU_CONF['insertImage'] = {
         }
         return src
     } // 也支持 async 函数
+}
+editorConfig.MENU_CONF['codeSelectLang'] = {
+    // 代码语言
+    codeLangs: [
+        { text: 'CSS', value: 'css' },
+        { text: 'HTML', value: 'html' },
+        { text: 'XML', value: 'xml' },
+        // 其他
+    ]
 }
 
 const props = defineProps({

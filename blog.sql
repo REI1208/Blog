@@ -16,7 +16,7 @@
 
 
 -- 导出 blog 的数据库结构
-CREATE DATABASE IF NOT EXISTS `blog` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+CREATE DATABASE IF NOT EXISTS `blog` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
 USE `blog`;
 
 -- 导出  表 blog.admin 结构
@@ -26,12 +26,12 @@ CREATE TABLE IF NOT EXISTS `admin` (
   `password` varchar(50) DEFAULT NULL,
   `token` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- 正在导出表  blog.admin 的数据：~0 rows (大约)
 DELETE FROM `admin`;
 INSERT INTO `admin` (`id`, `account`, `password`, `token`) VALUES
-	(1, 'admin', '123456', '4b5bf34e-7fa8-4de4-923b-2070ecdefe12');
+	(1, 'admin', '123456', '7c9157f2-9bdd-44f5-8bc8-545871123285');
 
 -- 导出  表 blog.blog 结构
 CREATE TABLE IF NOT EXISTS `blog` (
@@ -41,7 +41,7 @@ CREATE TABLE IF NOT EXISTS `blog` (
   `content` text,
   `create_time` bigint DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- 正在导出表  blog.blog 的数据：~15 rows (大约)
 DELETE FROM `blog`;
@@ -66,7 +66,7 @@ CREATE TABLE IF NOT EXISTS `category` (
   `id` bigint NOT NULL,
   `name` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- 正在导出表  blog.category 的数据：~3 rows (大约)
 DELETE FROM `category`;

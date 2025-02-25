@@ -2,7 +2,7 @@
 const express = require("express")
 const multer = require("multer")
 const path = require("path")
-const port = 3001
+const port = 8080
 const { query } = require("./db/DbUtils")
 //实例创建
 const app = express();
@@ -27,7 +27,6 @@ const update = multer({
 })
 app.use(update.any())
 app.use(express.static(path.join(__dirname, "public")))
-
 
 //自定义检验登录中间件
 const ADMIN_TOKEN_PATH = "/_token"
@@ -79,5 +78,5 @@ app.get("/", (req, res) => {
 })
 
 app.listen(port, () => {
-    console.log(`服务器正在端口 ${port} 运行`);
+    console.log(`服务器正在http://localhost:${port} 运行`);
 });

@@ -58,7 +58,7 @@
                     <n-form-item label="内容">
                         <rich-text-editor v-model="update.content" :clearCommand="clearCommand"></rich-text-editor>
                     </n-form-item>
-                    {{ update.content }}
+                    <div v-html="update.content"></div>
                 </n-form>
                 <div>
                     <n-button @click="Update">修改</n-button>

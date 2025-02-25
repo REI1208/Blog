@@ -40,7 +40,9 @@
 
         <div v-for="(blog, index) in blogList">
             <n-card :title="blog.title" @click="toDetail(blog)" hoverable :style="{ marginTop: '10px' }">
-                {{ blog.content }}
+                <n-space align="center">
+                    <div v-html="blog.content"></div>
+                </n-space>
                 <template #footer>
                     <n-space align="center">
                         <div>
@@ -57,7 +59,7 @@
         <div class="footer">
             <div>
                 <n-gradient-text type="info">
-                    Power by Rei
+                    Power by Rei(cicdtest)
                 </n-gradient-text>
 
             </div>
@@ -93,7 +95,7 @@ onMounted(() => {
 const searchByCategory = (categoryId) => {
     pageInfo.categoryId = categoryId
     loadBlogs()
-}
+}//切换分类
 
 const loadCategorys = async () => {
     let res = await axios.get("/category/list")
@@ -104,7 +106,7 @@ const loadCategorys = async () => {
         }
     })
     console.log(categoryOptions.value)
-}
+}//分类列表
 
 const categoryname = computed(() => {
     let categoryOption = categoryOptions.value.find((option) => {
@@ -115,8 +117,7 @@ const categoryname = computed(() => {
 
 const toDetail = (blog) => {
     router.push({ path: "/datail", query: { id: blog.id } })
-
-}
+}//详情页路由跳转
 
 
 const homePage = () => {
@@ -155,8 +156,7 @@ const loadBlogs = async (page = 0) => {
 }
 const replayNumber = () => {
     numberAnimationInstRef.value?.play()
-}
-
+}//重新播放数值动画
 </script>
 
 <style lang="scss" scoped>

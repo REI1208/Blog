@@ -1,8 +1,8 @@
 const config = {
-    port: 3001,
+    port: 3306,
     database: {
         Host: '127.0.0.1',
-        USER: 'blog',
+        USER: 'root',
         PASSWORD: '12345678',
         DATABASE: 'blog'
     }

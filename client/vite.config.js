@@ -7,15 +7,11 @@ import cdn from 'vite-plugin-cdn-import'
 export default defineConfig({
   plugins: [vue(),
   cdn({
+    // enableInDevMode: true,
     modules: ['vue', 'axios', 'lodash', 'vue-router',
       {
-        name: '@wangeditor/editor-for-vue',
-        var: '@wangeditor/editor-for-vue',
-        path: `https://unpkg.com/@wangeditor/editor-for-vue@5.1.12`,
-      },
-      {
         name: 'naive-ui',
-        var: 'naive-ui',
+        var: 'naive',
         path: `https://unpkg.com/naive-ui@2.39.0`,
       },
     ],
@@ -36,7 +32,7 @@ export default defineConfig({
     // chunkSizeWarningLimit: 1500,大文件报警阈值设置,不建议使用
     //rollup分包
     rollupOptions: {
-      external: ['@wangeditor/editor-for-vue', 'naive-ui'],
+      external: ['naive-ui'],
       output: { //静态资源分类打包
         chunkFileNames: 'static/js/[name]-[hash].js',
         entryFileNames: 'static/js/[name]-[hash].js',
@@ -54,6 +50,8 @@ export default defineConfig({
 //--2.18Mb,5.92s rollup分包
 //--1.89Mb,5.85s cdn引入vue,axios,loadsh,vue-router
 //插件自动引入的打包自动在rollup剔除
+//907kb,2.64ms cdn引入naive-ui wangeditorforvue无法直接引用，只能将包保存到本地或者用原生的html引入
+
 //--1.11Mb,5.85s cdn引入wangditor
 //--100.55kb,971ms cdn引入naive-ui
 
