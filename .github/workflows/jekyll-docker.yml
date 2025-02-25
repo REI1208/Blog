@@ -23,13 +23,23 @@ jobs:
       - name: Build client Docker image
         working-directory: ./client
         run: |
-          docker build -t admin/client:latest .
-      
+          docker build -t client:latest .
+
       # Build the server Docker image
       - name: Build server Docker image
         working-directory: ./server
         run: |
-          docker build -t admin/node-server:latest .
+          docker build -t node-server:latest .
+
+      # Tag client image with Harbor repository tag
+      - name: Tag client Docker image
+        run: |
+          docker tag client:latest 47.107.108.89:5000/blog_project/client:latest
+
+      # Tag server image with Harbor repository tag
+      - name: Tag server Docker image
+        run: |
+          docker tag node-server:latest 47.107.108.89:5000/blog_project/node-server:latest
 
       # Test List Docker images
       - name: List Docker images
@@ -37,14 +47,12 @@ jobs:
       
       # Push client Docker image to Harbor
       - name: Push client Docker image to Harbor
-        working-directory: ./client
         run: |
           docker login -u ${{ secrets.HARBOR_USERNAME }} -p ${{ secrets.HARBOR_PASSWORD }} 47.107.108.89:5000/
           docker push 47.107.108.89:5000/blog_project/client:latest
       
       # Push server Docker image to Harbor
       - name: Push server Docker image to Harbor
-        working-directory: ./server
         run: |
           docker login -u ${{ secrets.HARBOR_USERNAME }} -p ${{ secrets.HARBOR_PASSWORD }} 47.107.108.89:5000/
           docker push 47.107.108.89:5000/blog_project/node-server:latest
