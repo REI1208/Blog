@@ -76,7 +76,7 @@ jobs:
           ssh-keyscan -H 47.107.108.89 >> ~/.ssh/known_hosts
           chmod 644 ~/.ssh/known_hosts
           # 使用私钥连接到服务器
-          ssh -i private-key.pem username@47.107.108.89 << EOF
+          ssh -i private-key.pem root@47.107.108.89 << EOF
           cd /app/docker/blog/
           docker-compose pull  # 拉取最新的镜像
           docker-compose up -d  # 重启容器
