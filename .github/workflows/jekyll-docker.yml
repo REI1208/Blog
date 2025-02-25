@@ -18,7 +18,11 @@ jobs:
         run: |
           echo "{ \"insecure-registries\": [\"47.107.108.89:5000\"] }" | sudo tee /etc/docker/daemon.json
           sudo systemctl restart docker
-
+      # Delete useless Docker image
+      - name: delete useless image
+        run: |
+          docker image prune -a
+      
       # Build the client Docker image
       - name: Build client Docker image
         working-directory: ./client
@@ -72,5 +76,5 @@ jobs:
           sshpass -p "${{ secrets.SSH_PASSWORD }}" ssh -o StrictHostKeyChecking=no -t root@47.107.108.89 << 'EOF'
           cd /app/docker/blog/
           docker-compose pull  # 拉取最新的镜像
-          docker-compose up -d  # 重启容器
+          docker-compose --verbose up -d  # 重启容器
           EOF
