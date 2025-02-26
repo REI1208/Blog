@@ -1,9 +1,9 @@
 const config = {
     port: 3306,
     database: {
-        Host: '127.0.0.1',
+        Host: 'mysql',
         USER: 'root',
-        PASSWORD: '12345678',
+        PASSWORD: 'Whz20031208',
         DATABASE: 'blog'
     }
 }
