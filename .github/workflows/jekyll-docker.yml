@@ -12,30 +12,50 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-
+        
+      # Setup Docker with insecure registry
+      - name: Setup Docker for insecure registry
+        run: |
+          echo "{ \"insecure-registries\": [\"47.107.108.89:5000\"] }" | sudo tee /etc/docker/daemon.json
+          sudo systemctl restart docker
+      
       # Build the client Docker image
       - name: Build client Docker image
         working-directory: ./client
         run: |
-          docker build -t admin/client:latest .
-      
+          docker build -t client:latest .
+
       # Build the server Docker image
       - name: Build server Docker image
         working-directory: ./server
         run: |
-          docker build -t admin/node-server:latest .
+          docker build -t node-server:latest .
+
+      # Tag client image with Harbor repository tag
+      - name: Tag client Docker image
+        run: |
+          docker tag client:latest 47.107.108.89:5000/blog_project/client:latest
+
+      # Tag server image with Harbor repository tag
+      - name: Tag server Docker image
+        run: |
+          docker tag node-server:latest 47.107.108.89:5000/blog_project/node-server:latest
+
+      # Test List Docker images
+      - name: List Docker images
+        run: docker images
       
       # Push client Docker image to Harbor
       - name: Push client Docker image to Harbor
         run: |
-          docker login -u ${{ secrets.HARBOR_USERNAME }} -p ${{ secrets.HARBOR_PASSWORD }} http://47.107.108.89:5000/
-          docker push http://47.107.108.89:5000/blog_project/client:latest
+          docker login -u ${{ secrets.HARBOR_USERNAME }} -p ${{ secrets.HARBOR_PASSWORD }} 47.107.108.89:5000/
+          docker push 47.107.108.89:5000/blog_project/client:latest
       
       # Push server Docker image to Harbor
       - name: Push server Docker image to Harbor
         run: |
-          docker login -u ${{ secrets.HARBOR_USERNAME }} -p ${{ secrets.HARBOR_PASSWORD }} http://47.107.108.89:5000/
-          docker push http://47.107.108.89:5000/blog_project/node-server:latest
+          docker login -u ${{ secrets.HARBOR_USERNAME }} -p ${{ secrets.HARBOR_PASSWORD }} 47.107.108.89:5000/
+          docker push 47.107.108.89:5000/blog_project/node-server:latest
 
   deploy:
     runs-on: ubuntu-latest
@@ -49,8 +69,13 @@ jobs:
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
         run: |
-          ssh -i $SSH_PRIVATE_KEY user@your-server-ip << EOF
+          sshpass -p "${{ secrets.SSH_PASSWORD }}" ssh -o  StrictHostKeyChecking=no  -v root@47.107.108.89 << 'EOF'
           cd /app/docker/blog/
+          echo "ssh login Success"
           docker-compose pull  # 拉取最新的镜像
-          docker-compose up -d  # 重启容器
+          echo "docker-compose pull Success"
+          docker-compose down  # 关闭容器
+          echo "docker-compose down Success"
+          docker-compose --verbose up -d  # 重启容器
+          echo "Test3"
           EOF
