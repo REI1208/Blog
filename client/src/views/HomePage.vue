@@ -27,9 +27,6 @@
                     </template>
                 </n-statistic>
                 <n-space vertical>
-                    <n-gradient-text type="danger">
-                        这是一个展示数值动画的组件
-                    </n-gradient-text>
                     <n-button color="#ff69b4" @click="replayNumber">
                         Once again
                     </n-button>
@@ -61,7 +58,6 @@
                 <n-gradient-text type="info">
                     Power by Rei(cicdtest)
                 </n-gradient-text>
-
             </div>
             <div>
                 <n-gradient-text type="success">

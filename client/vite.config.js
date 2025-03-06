@@ -1,21 +1,25 @@
 import { defineConfig } from 'vite'
 import { visualizer } from "rollup-plugin-visualizer";
 import vue from '@vitejs/plugin-vue'
-import cdn from 'vite-plugin-cdn-import'
+// import cdn from 'vite-plugin-cdn-import'
 
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [vue(),
-  cdn({
-    // enableInDevMode: true,
-    modules: ['vue', 'axios', 'lodash', 'vue-router',
-      {
-        name: 'naive-ui',
-        var: 'naive',
-        path: `https://unpkg.com/naive-ui@2.39.0`,
-      },
-    ],
-  }),
+  // cdn({
+  //   modules: ['vue', 'axios', 'lodash', 'vue-router',
+  //     {
+  //       name: '@wangeditor/editor-for-vue',
+  //       var: '@wangeditor/editor-for-vue',
+  //       path: `https://unpkg.com/@wangeditor/editor-for-vue@5.1.12`,
+  //     },
+  //     {
+  //       name: 'naive-ui',
+  //       var: 'naive-ui',
+  //       path: `https://unpkg.com/naive-ui@2.39.0`,
+  //     },
+  //   ],
+  // }),
   visualizer({
     emitFile: false,
     file: "status.html",
