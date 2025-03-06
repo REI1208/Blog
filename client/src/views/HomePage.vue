@@ -56,7 +56,7 @@
         <div class="footer">
             <div>
                 <n-gradient-text type="info">
-                    Power by Rei(cicdtest)
+                    Power by Rei(cicd)
                 </n-gradient-text>
             </div>
             <div>
