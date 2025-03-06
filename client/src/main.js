@@ -6,7 +6,7 @@ import { router } from "./common/router"
 import axios from 'axios'
 import { createDiscreteApi } from "naive-ui"
 import { AdminStore } from './stores/AdminStore'
-// import naive from 'naive-ui'
+import naive from 'naive-ui'
 
 const { message, notification, dialog } = createDiscreteApi(
     ["message", "dialog", "notification"]
@@ -24,7 +24,7 @@ app.provide("server_url", axios.defaults.baseURL)
 const pinia = createPinia()
 app.use(pinia)
 app.use(router)
-// app.use(naive)
+app.use(naive)
 
 app.mount('#app')
 const adminStore = AdminStore()
